@@ -521,9 +521,6 @@
   width: 100%;
 }
 
-.container__black {
-  background-color: #000;
-}
 .container {
   max-width: 1200px; /* ширина контента */
   margin: 0 auto; /* центрирование */
@@ -584,6 +581,7 @@
 
 .infotext {
   font-size: 18px;
+  color: wheat;
 }
 .infotext__wheat {
   color: wheat;
@@ -804,6 +802,10 @@ input::placeholder {
 .page__body {
   margin: 0;
   min-width: 320px;
+  padding: 0 120px;
+  background-color: #0a0a0a;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 .page__menu {
   position: fixed;
@@ -824,7 +826,7 @@ input::placeholder {
   top: 0;
   bottom: 0;
   width: 120px; /* ширина водопада */
-  z-index: -1; /* за контентом */
+  z-index: 0; /* за контентом */
   overflow: hidden;
 }
 
@@ -862,9 +864,64 @@ canvas {
   right: 0;
 }
 
-/* чтобы контент не наезжал */
-.page__body {
-  padding: 0 120px;
+.random-ball {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(155, 89, 182, 0.8) 0%, rgba(52, 152, 219, 0.4) 50%, rgba(255, 255, 255, 0.2) 80%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(155, 89, 182, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  z-index: 9999; /* Найвищий пріоритет (поверх усього) */
+  pointer-events: none; /* Ігнорує кліки (вони проходять крізь кулю) */
+  mix-blend-mode: screen; /* Додає ефект "світіння" при накладанні на фото */
+  animation: floatAround_top 15s infinite alternate ease-in-out;
+}
+
+@keyframes floatAround_top {
+  0% {
+    top: 10%;
+    left: 10%;
+    transform: scale(1);
+  }
+  50% {
+    top: 70%;
+    left: 80%;
+    transform: scale(1.3);
+  }
+  100% {
+    top: 40%;
+    left: 30%;
+    transform: scale(0.9);
+  }
+}
+/* --- Анімація "Цифровий Слід" --- */
+@keyframes trailFlow {
+  0% {
+    background-position: 0% 0%; /* Потік починається згори */
+    filter: blur(10px);
+  }
+  20% {
+    filter: blur(5px);
+  }
+  100% {
+    background-position: 0% 100%; /* Потік стікає вниз */
+    filter: blur(12px);
+  }
+}
+.cursor-trail {
+  position: fixed;
+  width: 15px;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(52, 152, 219, 0) 0%, rgba(52, 152, 219, 0.8) 20%, rgb(255, 255, 255) 25%, rgba(155, 89, 182, 0.6) 50%, rgba(52, 152, 219, 0.8) 80%, rgba(52, 152, 219, 0) 100%);
+  background-size: 100% 400%;
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.3), 0 0 30px rgba(155, 89, 182, 0.1);
+  animation: trailFlow 4s linear infinite;
+  display: none;
+}
+@media (min-width: 1400px) {
+  .cursor-trail {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

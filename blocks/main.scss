@@ -8,6 +8,7 @@
 @import '../blocks/footer';
 
 
+
 .page{
   font-family: "Space Mono", sans-serif;
   color: $--Bcolor-button;
@@ -19,7 +20,18 @@
   &__body {
   margin: 0;
   min-width: 320px;
+
+    padding: 0 120px;
+    background-color: #0a0a0a;
+    background-image: 
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  
+
+  // background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
 }
+
 
   &__menu {
     position: fixed;
@@ -37,98 +49,13 @@
   }
 }
 
-
-// /* --- Анімація "Реальна Вода" (Різна Ширина + Бризки) --- */
-
-// @keyframes waterfall_with_splashes {
-//   0% {
-//     background-position: 0% 0%; /* Потік починається згори */
-//     width: 20px;               // Потік вузький зверху
-//     filter: blur(10px);        // Розмиття для спінювання
-//   }
-//   20% {
-//     width: 40px;               // Потік розширюється
-//     filter: blur(5px);         // Стає чіткішим
-//   }
-//   40% {
-//     width: 15px;               // Знову вужчий
-//   }
-//   60% {
-//     width: 50px;               // Максимальна ширина (хвиля)
-//     filter: blur(12px);        // Сильне розмиття (бризки)
-//   }
-//   80% {
-//     width: 25px;               // Знову вужчий
-//   }
-//   100% {
-//     background-position: 0% 100%; /* Потік стікає вниз */
-//     width: 40px;               // Стандартна ширина
-//     filter: blur(15px);        // Спінювання знизу
-//   }
-// }
-
-// body.page__body {
-//   position: relative; // База для позиціювання
-//   overflow-x: hidden; // Запобігаємо горизонтальній прокрутці
-
-//   // Спільні стилі для обох водяних потоків
-//   &::before,
-//   &::after {
-//     content: "";
-//     position: fixed; // Змінюємо на fixed, щоб вода "текла" разом зі скролом
-//     top: 0;
-//     height: 100vh;   // Фіксуємо висоту на весь екран
-//     z-index: -1;     // Вода під контентом сайту
-    
-//     // Складний градієнт, що імітує шари та спінювання води
-//     background: linear-gradient(
-//       180deg,
-//       rgba(52, 152, 219, 0) 0%,   // Прозорий зверху
-//       rgba(52, 152, 219, 0.4) 10%, // Прозорий блакитний шару води
-//       rgba(255, 255, 255, 0.7) 15%, // "Біла піна" або яскравий відблиск
-//       rgba(52, 152, 219, 0.5) 30%, // Глибший блакитний шар
-//       rgba(155, 89, 182, 0.3) 50%, // Фіолетовий перелив, що імітує тінь
-//       rgba(255, 255, 255, 0.5) 70%, // Ще один шар піни
-//       rgba(52, 152, 219, 0.4) 90%, 
-//       rgba(52, 152, 219, 0) 100%   // Прозорий знизу
-//     );
-//     background-size: 100% 300%; // Розтягуємо градієнт по вертикалі
-    
-//     // Додаємо ефект світіння навколо лінії, імітуючи "мокру" поверхню
-//     box-shadow: 0 0 15px rgba(52, 152, 219, 0.3), 
-//                 0 0 30px rgba(155, 89, 182, 0.1);
-    
-//     // Запускаємо анімацію з різною швидкістю та затримкою
-//     animation: waterfall_with_splashes 5s linear infinite;
-    
-//     // Важливо: за замовчуванням на мобільних приховуємо
-//     display: none; 
-
-//     @media (min-width: 1400px) { // Показуємо тільки на дуже широких екранах
-//       display: block; // Показуємо
-//     }
-//   }
-
-//   // Лівий потік (світліша вода)
-//   &::before {
-//     left: 20px; // Відсуваємо трохи від краю екрана
-//   }
-
-//   // Правий потік (трохи темніша вода, асинхронність)
-//   &::after {
-//     right: 20px;
-//     animation-delay: 2.5s; // Затримка для асинхронності
-//     filter: hue-rotate(-20deg) brightness(90%); // Змінюємо відтінок і яскравість
-//   }
-// }
-
 /* контейнер водопада */
 .waterfall {
   position: fixed;
   top: 0;
   bottom: 0;
   width: 120px; /* ширина водопада */
-  z-index: -1; /* за контентом */
+  z-index: 0; /* за контентом */
   overflow: hidden;
 }
 
@@ -168,7 +95,140 @@ canvas {
   right: 0;
 }
 
-/* чтобы контент не наезжал */
-.page__body {
-  padding: 0 120px;
+//Ball
+
+// .random-ball {
+//   position: fixed;
+//   width: 250px;  // Трохи зменшимо, щоб контур був чіткішим
+//   height: 250px;
+  
+//   // Радіальний градієнт, що імітує неонову кулю
+//   background: radial-gradient(
+//     circle, 
+//     rgba(155, 89, 182, 0.9) 0%,   // Яскравий неоновий фіолетовий
+//     rgba(155, 89, 182, 0.4) 40%,  // Більш прозорий
+//     rgba(52, 152, 219, 0.1) 70%,  // Легкий блакитний шару води
+//     rgba(52, 152, 219, 0) 100%   
+//   );
+  
+//   border-radius: 50%;
+  
+//   // Додаємо світіння навколо кулі
+//   box-shadow: 
+//     0 0 15px rgba(155, 89, 182, 0.6), 
+//     0 0 30px rgba(52, 152, 219, 0.4);
+  
+//   z-index: -1; // Щоб була під текстом
+//   pointer-events: none; // Щоб не заважала натискати на кнопки
+//   animation: floatAround_visible 20s infinite alternate ease-in-out;
+// }
+
+// @keyframes floatAround_visible {
+//   0% {
+//     top: 10%;
+//     left: 10%;
+//     transform: scale(1) rotate(0deg); // Додамо легке обертання
+//   }
+//   33% {
+//     top: 50%;
+//     left: 80%;
+//     transform: scale(1.15) rotate(120deg); // Більша амплітуда
+//   }
+//   66% {
+//     top: 80%;
+//     left: 20%;
+//     transform: scale(0.9) rotate(240deg);
+//   }
+//   100% {
+//     top: 30%;
+//     left: 60%;
+//     transform: scale(1.05) rotate(360deg);
+//   }
+// }
+
+
+.random-ball {
+  position: fixed;
+  width: 200px; 
+  height: 200px;
+  
+  // Робимо кольори трохи прозорішими, щоб бачити текст крізь кулю
+  background: radial-gradient(
+    circle, 
+    rgba(155, 89, 182, 0.8) 0%,   // Фіолетовий (неон)
+    rgba(52, 152, 219, 0.4) 50%,  // Блакитний (вода)
+    rgba(255, 255, 255, 0.2) 80%, // Білий відблиск
+    rgba(255, 255, 255, 0) 100%
+  );
+  
+  border-radius: 50%;
+  
+  // Додаємо інтенсивне світіння
+  box-shadow: 
+    0 0 20px rgba(155, 89, 182, 0.5), 
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+    
+  // --- МАГІЯ ТУТ ---
+  z-index: 9999;           /* Найвищий пріоритет (поверх усього) */
+  pointer-events: none;    /* Ігнорує кліки (вони проходять крізь кулю) */
+  mix-blend-mode: screen;  /* Додає ефект "світіння" при накладанні на фото */
+  // -----------------
+
+  animation: floatAround_top 15s infinite alternate ease-in-out;
+}
+
+@keyframes floatAround_top {
+  0% { top: 10%; left: 10%; transform: scale(1); }
+  50% { top: 70%; left: 80%; transform: scale(1.3); }
+  100% { top: 40%; left: 30%; transform: scale(0.9); }
+}
+
+//kursor
+
+/* --- Анімація "Цифровий Слід" --- */
+
+@keyframes trailFlow {
+  0% {
+    background-position: 0% 0%; /* Потік починається згори */
+    filter: blur(10px); // Розмиття для спінювання
+  }
+  20% {
+    filter: blur(5px);         // Стає чіткішим
+  }
+  100% {
+    background-position: 0% 100%; /* Потік стікає вниз */
+    filter: blur(12px);        // Спінювання знизу
+  }
+}
+
+.cursor-trail {
+  position: fixed;
+  width: 15px;      // Зробимо лінію тоншою та елегантнішою
+  height: 100vh;    // Фіксуємо висоту на весь екран
+  
+  // Градієнт, що імітує неонові потоки енергії
+  background: linear-gradient(
+    180deg, 
+    rgba(52, 152, 219, 0) 0%,   
+    rgba(52, 152, 219, 0.8) 20%, // Яскравий неоновий
+    rgba(255, 255, 255, 1) 25%, // "Біла піна" або яскравий відблиск
+    rgba(155, 89, 182, 0.6) 50%, // Фіолетовий перелив
+    rgba(52, 152, 219, 0.8) 80%, 
+    rgba(52, 152, 219, 0) 100%   
+  );
+  background-size: 100% 400%; // Розтягуємо градієнт по вертикалі
+  
+  // Додаємо світіння навколо лінії, імітуючи "мокру" поверхню
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.3), 
+              0 0 30px rgba(155, 89, 182, 0.1);
+  
+  // Запускаємо анімацію
+  animation: trailFlow 4s linear infinite;
+  
+  // Важливо: за замовчуванням на мобільних приховуємо
+  display: none; 
+
+  @media (min-width: 1400px) { // Показуємо тільки на дуже широких екранах
+    display: block; // Показуємо
+  }
 }
