@@ -1,0 +1,141 @@
+@import '../utilits/mixin';
+
+.content {
+  // display: grid;//grid
+
+  // @include columns;
+
+  // gap: 40px;
+  // justify-content: center;
+  // margin-top: 48px;
+
+  display: flex; 
+  transition: transform 0.8s ease-in-out; 
+  gap: 0; 
+  margin-top: 48px;
+  width: 100%;
+}
+
+.infoTitle {
+  display: flex;
+  line-height: 36px;
+
+  @include info-title;
+
+  background: linear-gradient(270deg, #3498db, #9b59b6, #e74c3c, #f1c40f, aqua, #000);
+  background-size: 800% 800%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradient 4s linear infinite;
+
+  // &-contact{
+  //   margin-bottom: 48px
+  // }
+}
+
+.products {
+  overflow: hidden; // Чтобы не было полосы прокрутки
+  
+  @include margin-card;
+  &__card {
+    // display: block;
+    // width: 100%;
+    // margin: 0;
+
+    flex: 0 0 100%; // Каждая карточка занимает 100% ширины слайдера
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px; // Если нужны отступы между карточками
+    @media (min-width: 1260px) {
+    flex: 0 0 33.33%; // По 3 карточки на больших экранах
+  }
+
+    @include header-icon-hover (transform, scale($--transform-scale));
+    &-people1 {
+      @include main-img;
+
+      background-image: url(../img/people6.png);
+    }
+    &-people2 {
+      @include main-img;
+
+      background-image: url(../img/maks.png);
+    }
+    &-people3 {
+      @include main-img;
+
+      background-image: url(../img/Slava.png);
+    }
+    &-people4 {
+      @include main-img;
+
+      background-image: url(../img/people3.jpg);
+    }
+    &-people5 {
+      @include main-img;
+
+      background-image: url(../img/people4.png);
+    }
+    &-people6 {
+      @include main-img;
+
+      background-image: url(../img/people5.png);
+    }
+    &-title {
+      margin-bottom: 8px;
+      color: --color-basic;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    &-info {
+      font-size: 16px;
+      color: --color-basic;
+      margin-bottom: 12px;
+    }
+    &-price {
+      font-weight: 700;
+      font-size: 16px;
+      color: --color-basic;
+    }
+  }
+}
+
+.products__card-content {
+  background: rgba(255, 255, 255, 0.4); // Прозорий фон
+  backdrop-filter: blur(12px);          // Розмиття фону під текстом
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: -30px; // Ефект накладання на фото майстра
+  position: relative;
+  z-index: 2;
+}
+
+//Animation
+
+.products__card {
+  position: relative;
+  transition: all 0.5s ease;
+  z-index: 1;
+
+  &:hover {
+    transform: translateY(-10px) scale(1.02); // Використовуємо твій міксин або цей код
+    
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      padding: 2px; // Товщина рамки
+      background: linear-gradient(270deg, #3498db, #9b59b6, #e74c3c, #f1c40f);
+      background-size: 400% 400%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: gradient 4s linear infinite;
+    }
+  }
+}

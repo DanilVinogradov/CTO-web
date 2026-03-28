@@ -1,0 +1,167 @@
+@import '../utilits/mixin.scss';
+
+.footer {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    input:hover {
+      border-color: $--Bcolor-button ;
+      background-color: var($--Hcolor-button);
+    }
+    textarea:hover {
+      border-color: $--Bcolor-button;
+    }
+    //     input:invalid {
+    //   border: 2px solid red;
+    // }
+
+    &-text {
+    border-radius: 8px;
+    height: 48px;
+    padding-left: 10px;
+
+    @include footer-form;
+    &:hover {
+      color: $--Bcolor-button;
+    }
+    }
+    &-message {
+      height: 148px;
+      border-radius: 8px;
+      padding: 10px 10px;
+      resize: none;
+
+      @include footer-form;
+    }
+  }
+  &__container {
+
+    display: flex;
+    justify-content: space-around;
+    // display: grid;
+
+    // @include footer-container;
+  }
+  &__img {
+  background-image: url(../img/footer.png);
+  height: 50vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat
+  }
+  &__title {
+    // grid-area: footer__title;
+    width: 30%;
+    font-size: 14px;
+  }
+  &__text {
+    grid-area: footer__text;
+    // margin-top: 24px;
+    color: lightyellow;
+  }
+  &__contact {
+    // display: grid;
+    // grid-area: footer__contact;
+    width: 30%;
+    font-size: 14px;
+
+    // margin-bottom: 48px;
+    // @media (min-width: 744px) {
+    //   margin-bottom: 80px;
+    // }
+  }
+  &__information {
+    grid-area: footer__information;
+    margin-bottom: 5px;
+    align-content: flex-end;
+    color: lightyellow;
+      &-title {
+    // margin-bottom: 16px;
+    color: lightyellow;
+    text-decoration: none;
+    &:hover {
+    color: goldenrod;
+    transition: transform 300ms, color 300ms, background-color 300ms;
+    position: relative;
+  }
+  }
+  }
+}
+
+.title__contacts {
+  margin-bottom: 48px;
+}
+
+input::placeholder {
+  color: #7E7E83;
+}
+
+
+  .button {
+    margin-top: 10px;
+    &-click {
+      width: 100%;
+      color: #FFFFFF;
+      text-decoration: none;
+      grid-area: button;
+
+      border: $--border;;
+      border-radius: 8px;
+
+      background-color: $--Bcolor-button;
+      height: 56px;
+      line-height: 56px;
+      text-align: center;
+      font-size: 16px;
+
+      &:hover {
+        background-color: $--Hcolor-button;
+        color: $--Bcolor-button;
+      }
+    }
+  }
+
+  .infoTitle-footer{
+    font-size: 20px;
+  }
+
+
+// Animation
+
+
+.footer__container {
+  // Початковий стан (невидимий)
+  opacity: 0;
+  transform: translateY(50px);
+  filter: blur(15px);
+  
+  // Час повернення у невидимий стан (коли скролиш назад)
+  transition: all 0.8s ease-in-out; 
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    // Час появи (коли футер з'являється)
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+// Почергова поява заголовків
+.footer__title, .footer__contact {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.footer__container.is-visible {
+  .footer__title { 
+    opacity: 1; 
+    transition-delay: 0.3s; 
+  }
+  .footer__contact { 
+    opacity: 1; 
+    transition-delay: 0.6s; 
+  }
+}
