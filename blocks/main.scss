@@ -1,0 +1,174 @@
+@import '../utilits/mixin';
+@import '../blocks/header';
+@import '../blocks/icon';
+@import '../blocks/menu';
+@import '../blocks/nav';
+@import '../blocks/card';
+@import '../blocks/content';
+@import '../blocks/footer';
+
+
+.page{
+  font-family: "Space Mono", sans-serif;
+  color: $--Bcolor-button;
+  font-size: 16px;
+  line-height: 140%;
+
+  scroll-behavior: smooth;
+
+  &__body {
+  margin: 0;
+  min-width: 320px;
+}
+
+  &__menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    opacity: 0;
+    pointer-events: none;
+
+    &:target {
+    opacity: 1;
+    pointer-events: all;
+  }
+  }
+}
+
+
+// /* --- Анімація "Реальна Вода" (Різна Ширина + Бризки) --- */
+
+// @keyframes waterfall_with_splashes {
+//   0% {
+//     background-position: 0% 0%; /* Потік починається згори */
+//     width: 20px;               // Потік вузький зверху
+//     filter: blur(10px);        // Розмиття для спінювання
+//   }
+//   20% {
+//     width: 40px;               // Потік розширюється
+//     filter: blur(5px);         // Стає чіткішим
+//   }
+//   40% {
+//     width: 15px;               // Знову вужчий
+//   }
+//   60% {
+//     width: 50px;               // Максимальна ширина (хвиля)
+//     filter: blur(12px);        // Сильне розмиття (бризки)
+//   }
+//   80% {
+//     width: 25px;               // Знову вужчий
+//   }
+//   100% {
+//     background-position: 0% 100%; /* Потік стікає вниз */
+//     width: 40px;               // Стандартна ширина
+//     filter: blur(15px);        // Спінювання знизу
+//   }
+// }
+
+// body.page__body {
+//   position: relative; // База для позиціювання
+//   overflow-x: hidden; // Запобігаємо горизонтальній прокрутці
+
+//   // Спільні стилі для обох водяних потоків
+//   &::before,
+//   &::after {
+//     content: "";
+//     position: fixed; // Змінюємо на fixed, щоб вода "текла" разом зі скролом
+//     top: 0;
+//     height: 100vh;   // Фіксуємо висоту на весь екран
+//     z-index: -1;     // Вода під контентом сайту
+    
+//     // Складний градієнт, що імітує шари та спінювання води
+//     background: linear-gradient(
+//       180deg,
+//       rgba(52, 152, 219, 0) 0%,   // Прозорий зверху
+//       rgba(52, 152, 219, 0.4) 10%, // Прозорий блакитний шару води
+//       rgba(255, 255, 255, 0.7) 15%, // "Біла піна" або яскравий відблиск
+//       rgba(52, 152, 219, 0.5) 30%, // Глибший блакитний шар
+//       rgba(155, 89, 182, 0.3) 50%, // Фіолетовий перелив, що імітує тінь
+//       rgba(255, 255, 255, 0.5) 70%, // Ще один шар піни
+//       rgba(52, 152, 219, 0.4) 90%, 
+//       rgba(52, 152, 219, 0) 100%   // Прозорий знизу
+//     );
+//     background-size: 100% 300%; // Розтягуємо градієнт по вертикалі
+    
+//     // Додаємо ефект світіння навколо лінії, імітуючи "мокру" поверхню
+//     box-shadow: 0 0 15px rgba(52, 152, 219, 0.3), 
+//                 0 0 30px rgba(155, 89, 182, 0.1);
+    
+//     // Запускаємо анімацію з різною швидкістю та затримкою
+//     animation: waterfall_with_splashes 5s linear infinite;
+    
+//     // Важливо: за замовчуванням на мобільних приховуємо
+//     display: none; 
+
+//     @media (min-width: 1400px) { // Показуємо тільки на дуже широких екранах
+//       display: block; // Показуємо
+//     }
+//   }
+
+//   // Лівий потік (світліша вода)
+//   &::before {
+//     left: 20px; // Відсуваємо трохи від краю екрана
+//   }
+
+//   // Правий потік (трохи темніша вода, асинхронність)
+//   &::after {
+//     right: 20px;
+//     animation-delay: 2.5s; // Затримка для асинхронності
+//     filter: hue-rotate(-20deg) brightness(90%); // Змінюємо відтінок і яскравість
+//   }
+// }
+
+/* контейнер водопада */
+.waterfall {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 120px; /* ширина водопада */
+  z-index: -1; /* за контентом */
+  overflow: hidden;
+}
+
+/* левый */
+.waterfall-left {
+  left: 0;
+}
+
+/* правый */
+.waterfall-right {
+  right: 0;
+}
+
+/* видео */
+.waterfall video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// mein animation
+
+canvas {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 120px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#waterfall-left {
+  left: 0;
+}
+
+#waterfall-right {
+  right: 0;
+}
+
+/* чтобы контент не наезжал */
+.page__body {
+  padding: 0 120px;
+}

@@ -1,0 +1,20 @@
+.icon {
+  display: block;
+
+  @include header-icon;
+
+  background-size: cover;
+
+  @include header-icon-hover (transform, scale(1.2));
+&--phone {
+  background-image: url(../img/phoneIcon.svg);
+}
+
+&--menu {
+  background-image: url(../img/badger__menu.png);
+}
+
+&--close {
+  background-image: url(../img/Icon-Close.png);
+}
+}
