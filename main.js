@@ -195,3 +195,57 @@ function createWaterfall(canvas) {
 // запуск для двух сторон
 createWaterfall(document.getElementById('waterfall-left'));
 createWaterfall(document.getElementById('waterfall-right'));
+
+//Ball
+
+const ball = document.querySelector('.random-ball');
+
+function moveBall() {
+  const x = Math.random() * (window.innerWidth - 300);
+  const y = Math.random() * (window.innerHeight - 300);
+  
+  ball.style.transition = 'all 10s ease-in-out';
+  ball.style.left = `${x}px`;
+  ball.style.top = `${y}px`;
+}
+
+// Рухаємо кулю кожні 10 секунд
+setInterval(moveBall, 10000);
+moveBall();
+
+//kursor
+
+const trail = document.querySelector('.cursor-trail');
+let isMoving = false; // Прапорець для запобігання зайвим діям
+
+function moveTrail(e) {
+  if (isMoving) return; // Якщо ми вже в русі, нічого не робимо
+  
+  isMoving = true; // Позначаємо, що ми в русі
+  
+  trail.style.transition = 'all 0.1s ease-out'; // Дуже швидка та плавна transition
+  trail.style.left = `${e.clientX}px`; // Переміщуємо слід до курсору
+  trail.style.top = `${e.clientY}px`; // І трохи вище/нижче
+  
+  // Чим швидше ти рухаєш курсором, тим яскравішим стає слід
+  const speed = Math.min(1.5, (Math.abs(e.movementX) + Math.abs(e.movementY)) / 100);
+  trail.style.filter = `blur(${speed * 5}px) brightness(${100 + speed * 50}%)`;
+  
+  // Після руху скидаємо прапорець, щоб дозволити наступну дію
+  setTimeout(() => {
+    isMoving = false;
+  }, 100); // Час затримки має збігатися з часом transition
+}
+
+// Слухаємо рух курсору
+window.addEventListener('mousemove', moveTrail);
+
+// Показуємо слід, коли курсор на сторінці
+window.addEventListener('mouseenter', () => {
+  trail.style.display = 'block';
+});
+
+// Приховуємо слід, коли курсор залишає сторінку
+window.addEventListener('mouseleave', () => {
+  trail.style.display = 'none';
+});
