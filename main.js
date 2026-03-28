@@ -195,3 +195,5 @@ function createWaterfall(canvas) {
 // запуск для двух сторон
 createWaterfall(document.getElementById('waterfall-left'));
 createWaterfall(document.getElementById('waterfall-right'));
+
+

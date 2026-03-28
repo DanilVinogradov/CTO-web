@@ -521,9 +521,6 @@
   width: 100%;
 }
 
-.container__black {
-  background-color: #000;
-}
 .container {
   max-width: 1200px; /* ширина контента */
   margin: 0 auto; /* центрирование */
@@ -584,6 +581,7 @@
 
 .infotext {
   font-size: 18px;
+  color: wheat;
 }
 .infotext__wheat {
   color: wheat;
@@ -804,6 +802,10 @@ input::placeholder {
 .page__body {
   margin: 0;
   min-width: 320px;
+  padding: 0 120px;
+  background-color: #0a0a0a;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 .page__menu {
   position: fixed;
@@ -824,7 +826,7 @@ input::placeholder {
   top: 0;
   bottom: 0;
   width: 120px; /* ширина водопада */
-  z-index: -1; /* за контентом */
+  z-index: 0; /* за контентом */
   overflow: hidden;
 }
 
@@ -863,8 +865,5 @@ canvas {
 }
 
 /* чтобы контент не наезжал */
-.page__body {
-  padding: 0 120px;
-}
 
 /*# sourceMappingURL=main.css.map */

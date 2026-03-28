@@ -4,7 +4,6 @@
 
 .container {
   &__black{
-    background-color: #000;
   }
   max-width: 1200px;  /* ширина контента */
   margin: 0 auto;     /* центрирование */
@@ -71,6 +70,7 @@
 }
 .infotext{
     font-size: 18px;
+    color: wheat;
 
     &__wheat{
         color: wheat;
