@@ -215,37 +215,91 @@ moveBall();
 
 //kursor
 
-const trail = document.querySelector('.cursor-trail');
-let isMoving = false; // Прапорець для запобігання зайвим діям
+// const trail = document.querySelector('.cursor-trail');
+// let isMoving = false; // Прапорець для запобігання зайвим діям
 
-function moveTrail(e) {
-  if (isMoving) return; // Якщо ми вже в русі, нічого не робимо
+// function moveTrail(e) {
+//   if (isMoving) return; // Якщо ми вже в русі, нічого не робимо
   
-  isMoving = true; // Позначаємо, що ми в русі
+//   isMoving = true; // Позначаємо, що ми в русі
   
-  trail.style.transition = 'all 0.1s ease-out'; // Дуже швидка та плавна transition
-  trail.style.left = `${e.clientX}px`; // Переміщуємо слід до курсору
-  trail.style.top = `${e.clientY}px`; // І трохи вище/нижче
+//   trail.style.transition = 'all 0.1s ease-out'; // Дуже швидка та плавна transition
+//   trail.style.left = `${e.clientX}px`; // Переміщуємо слід до курсору
+//   trail.style.top = `${e.clientY}px`; // І трохи вище/нижче
   
-  // Чим швидше ти рухаєш курсором, тим яскравішим стає слід
-  const speed = Math.min(1.5, (Math.abs(e.movementX) + Math.abs(e.movementY)) / 100);
-  trail.style.filter = `blur(${speed * 5}px) brightness(${100 + speed * 50}%)`;
+//   // Чим швидше ти рухаєш курсором, тим яскравішим стає слід
+//   const speed = Math.min(1.5, (Math.abs(e.movementX) + Math.abs(e.movementY)) / 100);
+//   trail.style.filter = `blur(${speed * 5}px) brightness(${100 + speed * 50}%)`;
   
-  // Після руху скидаємо прапорець, щоб дозволити наступну дію
-  setTimeout(() => {
-    isMoving = false;
-  }, 100); // Час затримки має збігатися з часом transition
+//   // Після руху скидаємо прапорець, щоб дозволити наступну дію
+//   setTimeout(() => {
+//     isMoving = false;
+//   }, 100); // Час затримки має збігатися з часом transition
+// }
+
+// // Слухаємо рух курсору
+// window.addEventListener('mousemove', moveTrail);
+
+// // Показуємо слід, коли курсор на сторінці
+// window.addEventListener('mouseenter', () => {
+//   trail.style.display = 'block';
+// });
+
+// // Приховуємо слід, коли курсор залишає сторінку
+// window.addEventListener('mouseleave', () => {
+//   trail.style.display = 'none';
+// });
+
+//Magnit
+
+const links = document.querySelectorAll('.nav__link');
+
+links.forEach(link => {
+  link.addEventListener('mousemove', (e) => {
+    const rect = link.getBoundingClientRect();
+
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    link.style.transform = `translate(${x * 0.2}px, ${y * 0.3}px) scale(1.1)`;
+  });
+
+  link.addEventListener('mouseleave', () => {
+    link.style.transform = 'translate(0,0) scale(1)';
+  });
+});
+
+const cursor = document.querySelector('.cursor');
+const menu = document.querySelector('.menu');
+
+let mouseX = 0;
+let mouseY = 0;
+let posX = 0;
+let posY = 0;
+
+menu.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+menu.addEventListener('mouseenter', () => {
+  cursor.style.opacity = '1';
+});
+
+menu.addEventListener('mouseleave', () => {
+  cursor.style.opacity = '0';
+});
+
+function animateCursor() {
+  posX += (mouseX - posX) * 0.1;
+  posY += (mouseY - posY) * 0.1;
+
+  cursor.style.left = posX + 'px';
+  cursor.style.top = posY + 'px';
+
+  requestAnimationFrame(animateCursor);
 }
 
-// Слухаємо рух курсору
-window.addEventListener('mousemove', moveTrail);
+animateCursor();
 
-// Показуємо слід, коли курсор на сторінці
-window.addEventListener('mouseenter', () => {
-  trail.style.display = 'block';
-});
 
-// Приховуємо слід, коли курсор залишає сторінку
-window.addEventListener('mouseleave', () => {
-  trail.style.display = 'none';
-});
