@@ -88,11 +88,11 @@
 .header__title {
   font-family: "Space Grotesk", sans-serif;
   margin: 0;
-  font-size: 36px;
+  font-size: 24px;
 }
 @media (min-width: 744px) {
   .header__title {
-    font-size: 48px;
+    font-size: 36px;
   }
 }
 @media (min-width: 1260px) {
@@ -182,7 +182,6 @@
   z-index: 1000;
   box-sizing: border-box;
   height: 100vh;
-  background-color: #E5E6E8;
   font-weight: 700;
 }
 .menu:target {
@@ -262,8 +261,263 @@
   transform: scaleX(1);
 }
 
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(20px);
+  background: radial-gradient(circle at 30% 20%, rgba(0, 255, 255, 0.08), transparent), radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.08), transparent), rgba(10, 10, 10, 0.9);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow: hidden;
+}
+.menu:target {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200px 200px;
+  }
+}
+.menu::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.25), transparent 70%);
+  filter: blur(100px);
+  top: -100px;
+  left: -100px;
+  animation: blobMove 12s infinite alternate ease-in-out;
+}
+
+@keyframes blobMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(300px, 200px);
+  }
+}
+.nav__item {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.menu:target .nav__item {
+  animation: fadeUp 0.6s forwards;
+}
+
+.menu:target .nav__item:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.menu:target .nav__item:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.menu:target .nav__item:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.menu:target .nav__item:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .nav__link {
-  color: inherit;
+  position: relative;
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav__link::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  background: linear-gradient(90deg, cyan, magenta, cyan);
+  opacity: 0;
+  filter: blur(10px);
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.nav__link:hover::before {
+  opacity: 1;
+}
+
+.nav__link:hover {
+  color: cyan;
+  letter-spacing: 2px;
+}
+
+.nav__link:hover {
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(2px, -2px);
+  }
+  60% {
+    transform: translate(-1px, 1px);
+  }
+  80% {
+    transform: translate(1px, -1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+.menu__scan {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  background: linear-gradient(90deg, transparent, cyan, transparent);
+  animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(400px);
+  }
+}
+.nav__link {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+/* неоновая линия */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #9b59b6, #3498db);
+  box-shadow: 0 0 10px #9b59b6;
+  transition: 0.3s;
+}
+
+/* hover */
+.nav__link:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #9b59b6, 0 0 10px #3498db, 0 0 20px #9b59b6;
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+.menu::before,
+.menu::after,
+.menu__scan,
+.menu__lines {
+  pointer-events: none;
+}
+
+.menu__content {
+  position: relative;
+  z-index: 2;
+}
+
+.top-bar {
+  position: relative;
+  z-index: 2;
+}
+
+.cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, cyan, transparent 70%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.3s;
+}
+
+.menu__lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(120deg, transparent, rgba(0, 255, 255, 0.2), transparent, rgba(255, 0, 255, 0.2), transparent);
+  background-size: 300% 300%;
+  animation: neonFlow 6s linear infinite;
+}
+
+@keyframes neonFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.menu__lines::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 2px;
+  top: 50%;
+  background: linear-gradient(90deg, transparent, cyan, transparent);
+  animation: scanLine 3s linear infinite;
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.nav__link {
+  color: peachpuff;
   text-decoration: none;
   font-size: 22px;
   line-height: 22px;
@@ -297,6 +551,12 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.nav__link {
+  display: inline-block;
+  transition: transform 0.2s ease, letter-spacing 0.3s;
+  will-change: transform;
 }
 
 /* #region Animation */
@@ -569,8 +829,80 @@
   background-position: center;
 }
 
+.information__img-posl1 {
+  background-image: url("../img_poslygi/dtp.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-posl2 {
+  background-image: url("../img_poslygi/help.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-posl3 {
+  background-image: url("../img_poslygi/transport.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-posl4 {
+  background-image: url("../img_poslygi/posl4.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-help1 {
+  background-image: url("../img_poslygi/help1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-help2 {
+  background-image: url("../img_poslygi/help2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-help3 {
+  background-image: url("../img_poslygi/help3.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-help4 {
+  background-image: url("../img_poslygi/help4.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-delete1 {
+  background-image: url("../img_poslygi/delete1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-delete2 {
+  background-image: url("../img_poslygi/delete2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-delete3 {
+  background-image: url("../img_poslygi/delete3.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.information__img-delete4 {
+  background-image: url("../img_poslygi/delete4.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
 .information__title {
-  font-size: 24px;
+  font-size: 14px;
   background: linear-gradient(270deg, #3498db, #9b59b6, #e74c3c, #f1c40f, aqua, #000);
   background-size: 800% 800%;
   background-position: 0% 50%;
@@ -578,13 +910,30 @@
   -webkit-text-fill-color: transparent;
   animation: gradient 4s linear infinite;
 }
+@media (min-width: 744px) {
+  .information__title {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1260px) {
+  .information__title {
+    font-size: 24px;
+  }
+}
 
 .infotext {
-  font-size: 18px;
+  font-size: 12px;
   color: wheat;
 }
-.infotext__wheat {
-  color: wheat;
+@media (min-width: 744px) {
+  .infotext {
+    font-size: 14px;
+  }
+}
+@media (min-width: 1260px) {
+  .infotext {
+    font-size: 18px;
+  }
 }
 
 .button {
@@ -642,6 +991,46 @@
   transition-delay: 0.4s;
 }
 
+@media (max-width: 480px) {
+  .information {
+    flex-direction: column; /* Ставимо в стовпчик */
+    gap: 20px;
+    padding: 30px 0;
+  }
+  .information__img {
+    width: 100% !important; /* Фото на всю ширину */
+    height: 200px; /* Зменшуємо висоту для мобілок */
+    order: -1; /* ПРИМУСОВО ставимо фото ПЕРШИМ (зверху) */
+  }
+  .information__text {
+    width: 100% !important;
+    text-align: center; /* Центруємо текст для краси */
+  }
+  /* Виправляємо анімацію: на мобільних краще виїжджати знизу, 
+     або зменшити амплітуду, щоб не "губити" блоки */
+  .from-left, .from-right {
+    transform: translateY(30px); /* Замість translateX, щоб не було дірок по боках */
+  }
+  .show {
+    transform: translateY(0) !important;
+  }
+}
+@media (max-width: 480px) {
+  .information__img {
+    display: block !important; /* Гарантуємо, що блок не прихований */
+    width: 100% !important; /* На всю ширину екрана */
+    height: 250px !important; /* ПРИМУСОВА висота, щоб фон було видно */
+    min-height: 250px; /* Додаткова страховка */
+    background-size: cover; /* Щоб фото заповнило весь блок */
+    background-position: center;
+    order: -1; /* Ставимо картинку над текстом */
+  }
+  /* Виправляємо анімацію, яка може "тримати" блоки прозорими */
+  .information__img.show {
+    opacity: 1 !important;
+    transform: none !important; /* Тимчасово вимкни зсув, щоб перевірити появу */
+  }
+}
 /* #region Animation */
 /* #endregion */
 /* #region animation */
@@ -698,7 +1087,14 @@
 }
 .footer__img {
   background-image: url(../img/footer.png);
-  height: 50vh;
+  height: 100vh;
+}
+@media (min-width: 1260px) {
+  .footer__img {
+    height: 50vh;
+  }
+}
+.footer__img {
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -711,6 +1107,17 @@
 .footer__text {
   grid-area: footer__text;
   color: lightyellow;
+  font-size: 10px;
+}
+@media (min-width: 744px) {
+  .footer__text {
+    font-size: 12px;
+  }
+}
+@media (min-width: 1260px) {
+  .footer__text {
+    font-size: 16px;
+  }
 }
 .footer__contact {
   width: 30%;
@@ -721,6 +1128,17 @@
   margin-bottom: 5px;
   align-content: flex-end;
   color: lightyellow;
+  font-size: 10px;
+}
+@media (min-width: 744px) {
+  .footer__information {
+    font-size: 12px;
+  }
+}
+@media (min-width: 1260px) {
+  .footer__information {
+    font-size: 16px;
+  }
 }
 .footer__information-title {
   color: lightyellow;
@@ -800,6 +1218,10 @@ input::placeholder {
   scroll-behavior: smooth;
 }
 .page__body {
+  margin: 0;
+  min-width: 320px;
+  padding: 0 120px;
+  box-sizing: border-box;
   margin: 0;
   min-width: 320px;
   padding: 0 120px;
@@ -895,32 +1317,34 @@ canvas {
   }
 }
 /* --- Анімація "Цифровий Слід" --- */
-@keyframes trailFlow {
-  0% {
-    background-position: 0% 0%; /* Потік починається згори */
-    filter: blur(10px);
+@media (max-width: 480px) {
+  /* 1. Звільняємо місце для контенту */
+  .page__body {
+    padding: 0 15px !important; /* Мінімальні відступи, щоб текст не лип до країв */
   }
-  20% {
-    filter: blur(5px);
+  /* 2. Робимо водоспад фоновим елементом */
+  .waterfall {
+    width: 10px; /* Зменшуємо ширину вдвічі */
+    opacity: 0.3; /* Робимо прозорішим, щоб текст "перекривав" відео */
+    z-index: -1; /* Відправляємо на задній план */
+    pointer-events: none; /* Щоб кліки проходили крізь відео на кнопки */
   }
-  100% {
-    background-position: 0% 100%; /* Потік стікає вниз */
-    filter: blur(12px);
+  /* 3. Вирівнюємо шапку (Tire Service) */
+  .header__title {
+    font-size: 28px; /* Трішки зменшуємо шрифт для мобілки */
+    text-align: center;
+    margin-left: 0;
   }
-}
-.cursor-trail {
-  position: fixed;
-  width: 15px;
-  height: 100vh;
-  background: linear-gradient(180deg, rgba(52, 152, 219, 0) 0%, rgba(52, 152, 219, 0.8) 20%, rgb(255, 255, 255) 25%, rgba(155, 89, 182, 0.6) 50%, rgba(52, 152, 219, 0.8) 80%, rgba(52, 152, 219, 0) 100%);
-  background-size: 100% 400%;
-  box-shadow: 0 0 15px rgba(52, 152, 219, 0.3), 0 0 30px rgba(155, 89, 182, 0.1);
-  animation: trailFlow 4s linear infinite;
-  display: none;
-}
-@media (min-width: 1400px) {
-  .cursor-trail {
-    display: block;
+  /* 4. Картки персоналу та блоки інформації */
+  .products__card,
+  .information {
+    width: 100%; /* Картки займають всю ширину */
+    margin-left: 0;
+    margin-right: 0;
+  }
+  /* Ховаємо горизонтальний скрол, якщо він ще десь вилазить */
+  .page {
+    overflow-x: hidden;
   }
 }
 

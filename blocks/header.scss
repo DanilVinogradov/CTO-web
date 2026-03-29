@@ -22,7 +22,7 @@
 }
   box-sizing: border-box;
 
-  height: 100vh;
+  @include header-height;
   background-image: url(../img/header_2.png);
   background-size: cover;
   background-position: center;

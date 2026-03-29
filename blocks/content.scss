@@ -53,10 +53,70 @@
   background-size: cover;
   background-position: center;
 }
+.information__img-posl1 {
+  background-image: url('../img_poslygi/dtp.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-posl2 {
+  background-image: url('../img_poslygi/help.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-posl3 {
+  background-image: url('../img_poslygi/transport.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-posl4 {
+  background-image: url('../img_poslygi/posl4.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-help1 {
+  background-image: url('../img_poslygi/help1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-help2 {
+  background-image: url('../img_poslygi/help2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-help3 {
+  background-image: url('../img_poslygi/help3.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-help4 {
+  background-image: url('../img_poslygi/help4.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-delete1 {
+  background-image: url('../img_poslygi/delete1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-delete2 {
+  background-image: url('../img_poslygi/delete2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-delete3 {
+  background-image: url('../img_poslygi/delete3.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.information__img-delete4 {
+  background-image: url('../img_poslygi/delete4.jpg');
+  background-size: cover;
+  background-position: center;
+}
 
 
 .information__title{
-    font-size: 24px;
+    font-size: 14px;
 
     background: linear-gradient(270deg, #3498db, #9b59b6, #e74c3c, #f1c40f, aqua, #000);
     background-size: 800% 800%;
@@ -65,14 +125,27 @@
     -webkit-text-fill-color: transparent;
 
     animation: gradient 4s linear infinite;
+
+    @media (min-width: 744px) {
+      font-size: 16px;
+    }
+      @media (min-width: 1260px) {
+        font-size: 24px;
+      }
 }
 .infotext{
-    font-size: 18px;
+    font-size: 12px;
     color: wheat;
-
-    &__wheat{
-        color: wheat;
+        @media (min-width: 744px) {
+        font-size: 14px;
     }
+          @media (min-width: 1260px) {
+          font-size: 18px;
+      }
+
+    // &__wheat{
+    //     color: wheat;
+    // }
 }
 
   .button {
@@ -132,3 +205,54 @@
 .delay-2 {
   transition-delay: 0.4s;
 }
+
+
+// mobile 
+
+@media (max-width: 480px) {
+  .information {
+    flex-direction: column; /* Ставимо в стовпчик */
+    gap: 20px;
+    padding: 30px 0;
+  }
+
+  .information__img {
+    width: 100% !important; /* Фото на всю ширину */
+    height: 200px;         /* Зменшуємо висоту для мобілок */
+    order: -1;             /* ПРИМУСОВО ставимо фото ПЕРШИМ (зверху) */
+  }
+
+  .information__text {
+    width: 100% !important;
+    text-align: center;    /* Центруємо текст для краси */
+  }
+
+  /* Виправляємо анімацію: на мобільних краще виїжджати знизу, 
+     або зменшити амплітуду, щоб не "губити" блоки */
+  .from-left, .from-right {
+    transform: translateY(30px); /* Замість translateX, щоб не було дірок по боках */
+  }
+
+  .show {
+    transform: translateY(0) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .information__img {
+    display: block !important; /* Гарантуємо, що блок не прихований */
+    width: 100% !important;    /* На всю ширину екрана */
+    height: 250px !important;  /* ПРИМУСОВА висота, щоб фон було видно */
+    min-height: 250px;         /* Додаткова страховка */
+    background-size: cover;    /* Щоб фото заповнило весь блок */
+    background-position: center;
+    order: -1;                 /* Ставимо картинку над текстом */
+  }
+
+  /* Виправляємо анімацію, яка може "тримати" блоки прозорими */
+  .information__img.show {
+    opacity: 1 !important;
+    transform: none !important; /* Тимчасово вимкни зсув, щоб перевірити появу */
+  }
+}
+
