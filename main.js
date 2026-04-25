@@ -301,5 +301,3 @@ function animateCursor() {
 }
 
 animateCursor();
-
-
