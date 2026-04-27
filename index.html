@@ -19,8 +19,7 @@
 <body class="page__body">
   <div class="cursor-trail"></div>
   <div class="random-ball"></div>
-<!-- <canvas id="waterfall-left"></canvas>
-<canvas id="waterfall-right"></canvas> -->
+
 
 
   <div class="waterfall waterfall-left">
@@ -47,11 +46,19 @@
           <span class="header__phone-number">+1 234 5555-55-55</span>
           <a href="tel:+1 234 5555-55-55" class="icon icon--phone"></a>
           <a href="#menu" class="icon icon--menu"></a>
+                    <div class="lang-switcher">
+            <div class="lang-current">UA</div>
+            <ul class="lang-list">
+              <li data-lang="uk">UA</li>
+              <li data-lang="en">EN</li>
+              <li data-lang="de">DE</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="header__bottom">
-        <h1 class="header__title data-key="header_title"">
+        <h1 class="header__title" data-key="header_title">
           Шиномонтаж
         </h1>
       </div>
@@ -60,7 +67,6 @@
 <aside id="menu" class="page__menu menu">
   <div class="menu__lines"></div>
   <div class="menu__scan"></div>
-  <!-- <div class="cursor"></div> -->
 
       <div class="top-bar menu__top">
         <a href="#">
@@ -83,7 +89,7 @@
               <a class="nav__link" href="help.html" data-key="nav_help">Допомога при поломці</a>
             </li>
             <li class="nav__item">
-              <a class="nav__link" href="delete.html" data-key="">Утилізація транспортних засобів, що вийшли з експлуатації</a>
+              <a class="nav__link" href="delete.html" data-key="delete" >Утилізація транспортних засобів, що вийшли з експлуатації</a>
             </li>
           </ul>
         </nav>
@@ -98,54 +104,54 @@
       <div class="products__card">
         <div class="products__card-people1"></div>
         <div class="products__card-content">
-          <div class="products__card-title" data-key="">Георгій</div>
-          <div class="products__card-info" data-key="">Експерт із 15-річним стажем. Спеціалізується на капітальному ремонті двигунів будь-якої складності та системному аналізі вузлів.</div>
-          <div class="products__card-price" data-key="">Головний механік</div>
+          <div class="products__card-title" data-key="p1_name">Георгій</div>
+          <div class="products__card-info" data-key="p1_info">Експерт із 15-річним стажем. Спеціалізується на капітальному ремонті двигунів будь-якої складності та системному аналізі вузлів.</div>
+          <div class="products__card-price" data-key="p1_role">Головний механік</div>
         </div>
       </div>
 
       <div class="products__card">
         <div class="products__card-people2"></div>
         <div class="products__card-content">
-          <div class="products__card-title" data-key="">Александр</div>
-          <div class="products__card-info" data-key="">Майстер з налаштування підвіски та гальмівних систем. Гарантує ідеальну керованість та безпеку вашого авто на дорозі.</div>
-          <div class="products__card-price" data-key="">Майстер ходовий</div>
+          <div class="products__card-title" data-key="p2_name">Олександр</div>
+          <div class="products__card-info" data-key="p2_info">Майстер з налаштування підвіски та гальмівних систем. Гарантує ідеальну керованість та безпеку вашого авто на дорозі.</div>
+          <div class="products__card-price" data-key="p2_role">Майстер ходовий</div>
         </div>
       </div>
 
       <div class="products__card">
         <div class="products__card-people3"></div>
         <div class="products__card-content">
-          <div class="products__card-title" data-key="">Дмитро</div>
-          <div class="products__card-info" data-key="">Профі у пошуку «невидимих» несправностей. Працює із сучасними бортовими комп'ютерами та складною електронікою.</div>
-          <div class="products__card-price" data-key="">Автоелектрик</div>
+          <div class="products__card-title" data-key="p3_name">Дмитро</div>
+          <div class="products__card-info" data-key="p3_info">Профі у пошуку «невидимих» несправностей. Працює із сучасними бортовими комп'ютерами та складною електронікою.</div>
+          <div class="products__card-price" data-key="p3_role">Автоелектрик</div>
         </div>
       </div>
 
       <div class="products__card">
         <div class="products__card-people4"></div>
         <div class="products__card-content">
-          <div class="products__card-title" data-key="">Артем</div>
-          <div class="products__card-info" data-key="">Швидке та якісне технічне обслуговування: заміна олій, фільтрів та повна діагностика перед покупкою чи поїздкою.</div>
-          <div class="products__card-price" data-key="">Фахівець з ТО</div>
+          <div class="products__card-title" data-key="p4_name">Артем</div>
+          <div class="products__card-info" data-key="p4_info">Швидке та якісне технічне обслуговування: заміна олій, фільтрів та повна діагностика перед покупкою чи поїздкою.</div>
+          <div class="products__card-price" data-key="p4_role">Фахівець з ТО</div>
         </div>
       </div>
 
       <div class="products__card">
         <div class="products__card-people5" ></div>
         <div class="products__card-content">
-          <div class="products__card-title" data-key="">Ігор</div>
-          <div class="products__card-info" data-key="">Професіонал у роботі з дисками та гумою. Ідеальне балансування та ремонт проколів з використанням топового обладнання.</div>
-          <div class="products__card-price" data-key="">Шиномонтаж</div>
+          <div class="products__card-title" data-key="p5_name">Ігор</div>
+          <div class="products__card-info" data-key="p5_info">Професіонал у роботі з дисками та гумою. Ідеальне балансування та ремонт проколів з використанням топового обладнання.</div>
+          <div class="products__card-price" data-key="p5_role">Шиномонтаж</div>
         </div>
       </div>
 
       <div class="products__card">
         <div class="products__card-people6"></div>
         <div class="products__card-content">
-          <div class="products__card-title" data-key="">Максим</div>
-          <div class="products__card-info" data-key="">Організує робочий процес та допоможе підібрати запчастини. Завжди на зв'язку, щоб проконсультувати вас за вартістю та термінами.</div>
-          <div class="products__card-price" data-key="">Приймальник/Менеджер</div>
+          <div class="products__card-title" data-key="p6_name">Максим</div>
+          <div class="products__card-info" data-key="p6_info">Організує робочий процес та допоможе підібрати запчастини. Завжди на зв'язку, щоб проконсультувати вас за вартістю та термінами.</div>
+          <div class="products__card-price" data-key="p6_role">Приймальник/Менеджер</div>
         </div>
       </div>
     </div>
@@ -155,13 +161,13 @@
         <div class="container">
           <div class="information">
             <div class="information__text from-left delay-1">
-              <h1 class="information__title" data-key="">
+              <h1 class="information__title" data-key="block1_title">
                 Найкраща служба евакуації автомобілів
               </h1>
-              <h2 class="infotext" data-key="">
+              <h2 class="infotext" data-key="block1_text">
                 Наші професійні послуги евакуації доступні в регіоні та забезпечать вам надійну та ефективну підтримку у разі поломки або проблем з автомобілем.
               </h2>
-              <a href="+1 234 5555-55-55" class="button button-click" data-key="">Набрати номер</a>
+              <a href="+1 234 5555-55-55" class="button button-click" data-key="call">Набрати номер</a>
             </div>
             <div class="information__img information__img-car1 from-right delay-2"></div>
           </div>
@@ -172,15 +178,15 @@
             <div class="information">
               <div class="information__img information__img-car2 from-left delay-1"></div>
               <div class="information__text from-right delay-2">
-                <h1 class="information__title" data-key="">
+                <h1 class="information__title" data-key="block2_title">
                   Діагностика несправностей та ремонт усіх легкових автомобілів.
                 </h1>
-                <h2 class="infotext" data-key="">
+                <h2 class="infotext" data-key="block2_text">
                   -допомога при поломці автомобіля <br>
                   -Спеціальне обладнання <br>
                   -Поряд з вами
                 </h2>
-                <a href="+1 234 5555-55-55" class="button button-click" data-key="">Набрати номер</a>
+                <a href="+1 234 5555-55-55" class="button button-click" data-key="call">Набрати номер</a>
               </div>
             </div>
           </div>
@@ -189,16 +195,16 @@
         <div class="container">
           <div class="information">
             <div class="information__text from-left delay-1">
-              <h1 class="information__title" data-key="">
+              <h1 class="information__title" data-key="block3_title">
                 Діагностика несправностей та ремонт усіх автомобілів.
               </h1>
-              <h2 class="infotext" data-key="">
+              <h2 class="infotext" data-key="block3_text">
                 -Двигуни, трансмісії, стартери, генератори <br>
                 -Електричні системи, пневматика <br>
                 -Паливні та водяні насоси <br>
                 -Підвіска, гальмівні системи
               </h2>
-              <a href="+1 234 5555-55-55" class="button button-click" data-key="">Набрати номер</a>
+              <a href="+1 234 5555-55-55" class="button button-click" data-key="call">Набрати номер</a>
             </div>
             <div class="information__img information__img-car3 from-right delay-2"></div>
           </div>
@@ -207,143 +213,25 @@
 
   </main>
 
-    <!-- <main>
-      <section id="products" class="products">
-
-        <h class="infoTitle">
-          Персонал
-        </h>
-
-        <div class="content">
-
-          <div class="products__card">
-            <div class="products__card-people1"></div>
-            <div class="container">
-              <div class="products__card-title">Георгий</div>
-              <div class="products__card-info">Эксперт с 15-летним стажем. Специализируется на капитальном ремонте двигателей любой сложности и системном анализе узлов.</div>
-              <div class="products__card-price">Главный механик</div>
-            </div>
-          </div>
-
-          <div class="products__card">
-            <div class="products__card-people2"></div>
-            <div class="container">
-              <div class="products__card-title">Александр</div>
-              <div class="products__card-info">Мастер по настройке подвески и тормозных систем. Гарантирует идеальную управляемость и безопасность вашего авто на дороге.</div>
-              <div class="products__card-price">Мастер ходовой</div>
-            </div>
-          </div>
-
-          <div class="products__card">
-            <div class="products__card-people3"></div>
-            <div class="container">
-              <div class="products__card-title">Дмитрий</div>
-              <div class="products__card-info">Профи в поиске «невидимых» неисправностей. Работает с современными бортовыми компьютерами и сложной электроникой.</div>
-              <div class="products__card-price">Автоэлектрик</div>
-            </div>
-          </div>
-          <div class="products__card">
-            <div class="products__card-people4"></div>
-            <div class="container">
-              <div class="products__card-title">Артем</div>
-              <div class="products__card-info">Быстрое и качественное техническое обслуживание: замена масел, фильтров и полная диагностика перед покупкой или поездкой.</div>
-              <div class="products__card-price">Специалист по ТО</div>
-            </div>
-          </div>
-
-          <div class="products__card">
-            <div class="products__card-people5"></div>
-            <div class="container">
-              <div class="products__card-title">Игорь</div>
-              <div class="products__card-info">Профессионал в работе с дисками и резиной. Идеальная балансировка и ремонт проколов с использованием топового оборудования.</div>
-              <div class="products__card-price">Шиномонтаж</div>
-            </div>
-          </div>
-
-          <div class="products__card">
-            <div class="products__card-people6"></div>
-            <div class="container">
-              <div class="products__card-title">Максим</div>
-              <div class="products__card-info">Организует рабочий процесс и поможет подобрать запчасти. Всегда на связи, чтобы проконсультировать вас по стоимости и срокам.</div>
-              <div class="products__card-price">Приемщик/Менеджер</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="container">
-          <div class="information">
-            <div class="information__text from-left delay-1">
-              <h1 class="information__title">
-                Лучшая служба эвакуации автомобилей
-              </h1>
-              <h2 class="infotext">
-                Наши профессиональные услуги эвакуации доступны в регионе и обеспечат вам надежную и эффективную поддержку в случае поломки или проблем с автомобилем.
-              </h2>
-              <a href="+1 234 5555-55-55" class="button button-click">Набрати номер</a>
-            </div>
-            <div class="information__img information__img-car1 from-right delay-2"></div>
-          </div>
-        </div>
-
-        <div class="section-black">
-          <div class="container" style="background-color: black;">
-            <div class="information">
-              <div class="information__img information__img-car2 from-left delay-1"></div>
-              <div class="information__text from-right delay-2">
-                <h1 class="information__title">
-                  Диагностика неисправностей и ремонт всех легковых автомобилей.
-                </h1>
-                <h2 class="infotext__wheat">
-                  -помощь при поломке автомобиля <br>
-                  -Специальное оборудование <br>
-                  -Рядом с вами
-                </h2>
-                <a href="+1 234 5555-55-55" class="button button-click">Набрати номер</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="information">
-            <div class="information__text from-left delay-1">
-              <h1 class="information__title">
-                Диагностика неисправностей и ремонт всех автомобилей.
-              </h1>
-              <h2 class="infotext">
-                -Двигатели, трансмиссии, стартеры, генераторы <br>
-                -Электрические системы, пневматика <br>
-                -Топливные и водяные насосы <br>
-                -Подвеска, тормозные системы
-              </h2>
-              <a href="+1 234 5555-55-55" class="button button-click">Набрати номер</a>
-            </div>
-            <div class="information__img information__img-car3 from-right delay-2"></div>
-          </div>
-        </div>
-      </section>
-    </main> -->
 
     <footer>
       <div class="footer__img">
 
       <div class="footer__container">
 
-        <div id="aboutAs" class="footer__title "> <h class="infoTitle infoTitle-footer" data-key="">Про нас</h>
+        <div id="aboutAs" class="footer__title "> <h class="infoTitle infoTitle-footer" data-key="about">Про нас</h>
 
-          <div class="footer__text" data-key="">Ми команда професіоналів, закоханих в автомобілі. Наше СТО пропонує повний спектр послуг: від планової заміни олії до складного ремонту двигуна та електроніки. Використовуємо тільки сучасне обладнання та перевірені запчастини, щоб ви відчували себе у безпеці на будь-якій дорозі.
+          <div class="footer__text" data-key="about_text">Ми команда професіоналів, закоханих в автомобілі. Наше СТО пропонує повний спектр послуг: від планової заміни олії до складного ремонту двигуна та електроніки. Використовуємо тільки сучасне обладнання та перевірені запчастини, щоб ви відчували себе у безпеці на будь-якій дорозі.
           </div>
         </div>
 
         <div id="contactUs" class="footer__contact">
-          <h class="infoTitle infoTitle-contact infoTitle-footer" data-key="">Контакти</h>
+          <h class="infoTitle infoTitle-contact infoTitle-footer" data-key="contacts">Контакти</h>
 
                   <div id="information" class="footer__information">
           <div class="footer__information footer__information-phone">
             <div class="footer__information footer__information-title">
-              <a class="footer__information footer__information-title" href="tel: +1 234 5555-55-55" data-key="">Телефон</a>
+              <a class="footer__information footer__information-title" href="tel: +1 234 5555-55-55" data-key="phone">Телефон</a>
             </div>
             <div class="footer__information footer__information-string">+1 234 5555-55-55</div>
           </div>
@@ -359,7 +247,7 @@
             <div class="footer__information footer__information-title">
               <a href="https://www.google.com/maps/place/400+first+ave,+suite+700,+Minneapolis,+MN+55401" target="_blank"
               rel="noopener noreferrer"
-              class="footer__information footer__information-title" data-key="">Адресса</a>
+              class="footer__information footer__information-title" data-key="address">Адресса</a>
             </div>
             <div class="footer__information footer__information-string">400 first ave.<br> suite 700 <br> Minneapolis, MN 55401</div>
           </div>
