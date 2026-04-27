@@ -144,57 +144,112 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //Mein animation
-function createWaterfall(canvas) {
-  const ctx = canvas.getContext('2d');
+// function createWaterfall(canvas) {
+//   if (!canvas) return; // 🔥 КРИТИЧНО
 
-  let drops = [];
+//   const ctx = canvas.getContext('2d');
+//   if (!ctx) return;
 
-  function resize() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = window.innerHeight;
-  }
+//   let drops = [];
 
-  window.addEventListener('resize', resize);
-  resize();
+//   function resize() {
+//     canvas.width = canvas.offsetWidth;
+//     canvas.height = window.innerHeight;
+//   }
 
-  // создаем капли
-  for (let i = 0; i < 100; i++) {
-    drops.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      speed: 2 + Math.random() * 4,
-      size: Math.random() * 2 + 1,
-      opacity: Math.random()
-    });
-  }
+//   window.addEventListener('resize', resize);
+//   resize();
 
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+//   for (let i = 0; i < 100; i++) {
+//     drops.push({
+//       x: Math.random() * canvas.width,
+//       y: Math.random() * canvas.height,
+//       speed: 2 + Math.random() * 4,
+//       size: Math.random() * 2 + 1,
+//       opacity: Math.random()
+//     });
+//   }
 
-    drops.forEach(drop => {
-      ctx.beginPath();
-      ctx.fillStyle = `rgba(173,216,230,${drop.opacity})`;
-      ctx.arc(drop.x, drop.y, drop.size, 0, Math.PI * 2);
-      ctx.fill();
+//   function draw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      drop.y += drop.speed;
+//     drops.forEach(drop => {
+//       ctx.fillStyle = `rgba(173,216,230,${drop.opacity})`;
+//       ctx.fillRect(drop.x, drop.y, drop.size, drop.size * 5);
 
-      // "перезапуск" сверху
-      if (drop.y > canvas.height) {
-        drop.y = 0;
-        drop.x = Math.random() * canvas.width;
-      }
-    });
+//       drop.y += drop.speed;
 
-    requestAnimationFrame(draw);
-  }
+//       if (drop.y > canvas.height) {
+//         drop.y = 0;
+//         drop.x = Math.random() * canvas.width;
+//       }
+//     });
 
-  draw();
-}
+//     requestAnimationFrame(draw);
+//   }
 
-// запуск для двух сторон
-createWaterfall(document.getElementById('waterfall-left'));
-createWaterfall(document.getElementById('waterfall-right'));
+//   draw();
+// }
+// const leftCanvas = document.getElementById('waterfall-left');
+// const rightCanvas = document.getElementById('waterfall-right');
+
+// if (leftCanvas) createWaterfall(leftCanvas);
+// if (rightCanvas) createWaterfall(rightCanvas);
+
+
+
+
+// function createWaterfall(canvas) {
+//   const ctx = canvas.getContext('2d');
+
+//   let drops = [];
+
+//   function resize() {
+//     canvas.width = canvas.offsetWidth;
+//     canvas.height = window.innerHeight;
+//   }
+
+//   window.addEventListener('resize', resize);
+//   resize();
+
+//   // создаем капли
+//   for (let i = 0; i < 100; i++) {
+//     drops.push({
+//       x: Math.random() * canvas.width,
+//       y: Math.random() * canvas.height,
+//       speed: 2 + Math.random() * 4,
+//       size: Math.random() * 2 + 1,
+//       opacity: Math.random()
+//     });
+//   }
+
+//   function draw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//     drops.forEach(drop => {
+//       ctx.beginPath();
+//       ctx.fillStyle = `rgba(173,216,230,${drop.opacity})`;
+//       ctx.arc(drop.x, drop.y, drop.size, 0, Math.PI * 2);
+//       ctx.fill();
+
+//       drop.y += drop.speed;
+
+//       // "перезапуск" сверху
+//       if (drop.y > canvas.height) {
+//         drop.y = 0;
+//         drop.x = Math.random() * canvas.width;
+//       }
+//     });
+
+//     requestAnimationFrame(draw);
+//   }
+
+//   draw();
+// }
+
+// // запуск для двух сторон
+// createWaterfall(document.getElementById('waterfall-left'));
+// createWaterfall(document.getElementById('waterfall-right'));
 
 //Ball
 
@@ -215,40 +270,7 @@ moveBall();
 
 //kursor
 
-// const trail = document.querySelector('.cursor-trail');
-// let isMoving = false; // Прапорець для запобігання зайвим діям
 
-// function moveTrail(e) {
-//   if (isMoving) return; // Якщо ми вже в русі, нічого не робимо
-  
-//   isMoving = true; // Позначаємо, що ми в русі
-  
-//   trail.style.transition = 'all 0.1s ease-out'; // Дуже швидка та плавна transition
-//   trail.style.left = `${e.clientX}px`; // Переміщуємо слід до курсору
-//   trail.style.top = `${e.clientY}px`; // І трохи вище/нижче
-  
-//   // Чим швидше ти рухаєш курсором, тим яскравішим стає слід
-//   const speed = Math.min(1.5, (Math.abs(e.movementX) + Math.abs(e.movementY)) / 100);
-//   trail.style.filter = `blur(${speed * 5}px) brightness(${100 + speed * 50}%)`;
-  
-//   // Після руху скидаємо прапорець, щоб дозволити наступну дію
-//   setTimeout(() => {
-//     isMoving = false;
-//   }, 100); // Час затримки має збігатися з часом transition
-// }
-
-// // Слухаємо рух курсору
-// window.addEventListener('mousemove', moveTrail);
-
-// // Показуємо слід, коли курсор на сторінці
-// window.addEventListener('mouseenter', () => {
-//   trail.style.display = 'block';
-// });
-
-// // Приховуємо слід, коли курсор залишає сторінку
-// window.addEventListener('mouseleave', () => {
-//   trail.style.display = 'none';
-// });
 
 //Magnit
 
@@ -301,3 +323,205 @@ function animateCursor() {
 }
 
 animateCursor();
+
+
+//language
+
+// document.addEventListener("DOMContentLoaded", function () {
+
+//   console.log("LANG SCRIPT WORKING"); // проверка
+
+//   const translations = {
+//     uk: {
+//       header_title: "Шиномонтаж",
+//       nav_24h: "Цілодобове обслуговування",
+//       nav_tow: "Послуги евакуатора",
+//       nav_help: "Допомога при поломці",
+//       staff_title: "Персонал"
+//     },
+//     en: {
+//       header_title: "Tire Service",
+//       nav_24h: "24/7 Service",
+//       nav_tow: "Tow Truck Services",
+//       nav_help: "Breakdown Assistance",
+//       staff_title: "Staff"
+//     },
+//     de: {
+//       header_title: "Reifenservice",
+//       nav_24h: "24/7 Service",
+//       nav_tow: "Abschleppdienst",
+//       nav_help: "Pannenhilfe",
+//       staff_title: "Personal"
+//     }
+//   };
+
+//   function setLanguage(lang) {
+//     console.log("SWITCH TO:", lang);
+
+//     document.querySelectorAll("[data-key]").forEach(el => {
+//       const key = el.dataset.key;
+
+//       if (!key) return;
+
+//       if (translations[lang] && translations[lang][key]) {
+//         el.innerText = translations[lang][key];
+//       }
+//     });
+
+//     localStorage.setItem("lang", lang);
+//   }
+
+//   // обработка кнопок
+//   document.querySelectorAll("[data-lang]").forEach(btn => {
+//     btn.addEventListener("click", function () {
+//       setLanguage(this.dataset.lang);
+//     });
+//   });
+
+//   // старт
+//   const saved = localStorage.getItem("lang") || "uk";
+//   setLanguage(saved);
+
+// });
+
+// function createWaterfall(canvas) {
+//   if (!canvas) return; // 🔥 КРИТИЧНО
+
+//   const ctx = canvas.getContext('2d');
+//   if (!ctx) return;
+
+//   let drops = [];
+
+//   function resize() {
+//     canvas.width = canvas.offsetWidth;
+//     canvas.height = window.innerHeight;
+//   }
+
+//   window.addEventListener('resize', resize);
+//   resize();
+
+//   for (let i = 0; i < 100; i++) {
+//     drops.push({
+//       x: Math.random() * canvas.width,
+//       y: Math.random() * canvas.height,
+//       speed: 2 + Math.random() * 4,
+//       size: Math.random() * 2 + 1,
+//       opacity: Math.random()
+//     });
+//   }
+
+//   function draw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//     drops.forEach(drop => {
+//       ctx.fillStyle = `rgba(173,216,230,${drop.opacity})`;
+//       ctx.fillRect(drop.x, drop.y, drop.size, drop.size * 5);
+
+//       drop.y += drop.speed;
+
+//       if (drop.y > canvas.height) {
+//         drop.y = 0;
+//         drop.x = Math.random() * canvas.width;
+//       }
+//     });
+
+//     requestAnimationFrame(draw);
+//   }
+
+//   draw();
+// }
+// const leftCanvas = document.getElementById('waterfall-left');
+// const rightCanvas = document.getElementById('waterfall-right');
+
+// if (leftCanvas) createWaterfall(leftCanvas);
+// if (rightCanvas) createWaterfall(rightCanvas);
+
+
+// ================= LANG SYSTEM =================
+document.addEventListener("DOMContentLoaded", () => {
+
+  const translations = {
+    uk: {
+      header_title: "Шиномонтаж",
+      nav_24h: "Цілодобове обслуговування",
+      nav_tow: "Послуги евакуатора",
+      nav_help: "Допомога при поломці",
+      staff_title: "Персонал",
+      delete: "Утилізація транспортних засобів, що вийшли з експлуатації"
+    },
+    en: {
+      header_title: "Tire Service",
+      nav_24h: "24/7 Service",
+      nav_tow: "Tow Truck Services",
+      nav_help: "Breakdown Assistance",
+      staff_title: "Staff",
+      delete: "Disposal of end-of-life vehicles"
+    },
+    de: {
+      header_title: "Reifenservice",
+      nav_24h: "24/7 Service",
+      nav_tow: "Abschleppdienst",
+      nav_help: "Pannenhilfe",
+      staff_title: "Personal",
+      delete: "Entsorgung von Altfahrzeugen"
+    }
+  };
+
+  function setLanguage(lang) {
+    console.log("LANG:", lang);
+
+    document.querySelectorAll("[data-key]").forEach(el => {
+      const key = el.dataset.key;
+
+      if (!key) return;
+
+      if (translations[lang] && translations[lang][key]) {
+        el.innerText = translations[lang][key];
+      }
+    });
+
+    localStorage.setItem("lang", lang);
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      setLanguage(btn.dataset.lang);
+    });
+  });
+
+  const savedLang = localStorage.getItem("lang") || "uk";
+  setLanguage(savedLang);
+
+});
+
+
+
+//language
+
+document.addEventListener("DOMContentLoaded", () => {
+  const langCurrent = document.querySelector(".lang-current");
+  const langItems = document.querySelectorAll(".lang-list li");
+
+  langItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const selectedLang = item.getAttribute("data-lang");
+      const selectedText = item.innerText;
+
+      // Оновлюємо текст на головній кнопці
+      langCurrent.innerText = selectedText;
+
+      // Викликаємо твою існуючу функцію перекладу
+      if (typeof setLanguage === "function") {
+        setLanguage(selectedLang);
+      }
+    });
+  });
+
+  // Встановлюємо початковий текст при завантаженні
+  const savedLang = localStorage.getItem("lang") || "uk";
+  const initialItem = Array.from(langItems).find(el => el.dataset.lang === savedLang);
+  if (initialItem) {
+    langCurrent.innerText = initialItem.innerText;
+  }
+});
+
