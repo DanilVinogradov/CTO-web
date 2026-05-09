@@ -1,3 +1,209 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+// 1. Конфігурація Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAYKb0W3sARVfJ_NzIFAIzKXYw5yU2xH6Q",
+  authDomain: "cto-project-7d9b2.firebaseapp.com",
+  projectId: "cto-project-7d9b2",
+  storageBucket: "cto-project-7d9b2.firebasestorage.app",
+  messagingSenderId: "86348237196",
+  appId: "1:86348237196:web:6df1fedbded4ca1b972ea9",
+  measurementId: "G-EBZ4HSE50H"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app); 
+
+// 2. Об'єкт перекладів
+const translations = {
+  uk: { 
+    form_title: "Записатися на сервіс", 
+    send_btn: "Відправити заявку",
+    error_name: "Введіть Ім'я та Прізвище з великої літери (напр. Петро Петренко)",
+    error_phone: "Введіть коректний номер з кодом країни (напр. +380...)",
+    error_issue: "Опишіть проблему детальніше (мінімум 5 символів)",
+    success: "Заявку успішно надіслано!",
+    call_promise: "Ми зателефонуємо вам протягом години.",
+    placeholder_car: "Виберіть марку авто"
+  },
+  en: { 
+    form_title: "Book a service", 
+    send_btn: "Send Request",
+    error_name: "Enter Name and Surname with capital letters (e.g., John Doe)",
+    error_phone: "Enter a valid number with country code (e.g., +44...)",
+    error_issue: "Please describe the issue in more detail",
+    success: "Order sent successfully!",
+    call_promise: "We will call you within an hour.",
+    placeholder_car: "Select car brand"
+  },
+  de: { 
+    form_title: "Termin buchen", 
+    send_btn: "Anfrage senden",
+    error_name: "Name und Nachname großschreiben (z. B. Max Mustermann)",
+    error_phone: "Geben Sie eine gültige Nummer mit Ländercode ein (z. B. +49...)",
+    error_issue: "Bitte beschreiben Sie das Problem genauer",
+    success: "Anfrage успішно надіслана!",
+    call_promise: "Wir rufen Sie innerhalb einer Stunde an.",
+    placeholder_car: "Automarke wählen"
+  }
+};
+
+function setLanguage(lang) {
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.dataset.key;
+    if (translations[lang] && translations[lang][key]) {
+      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+        el.placeholder = translations[lang][key];
+      } else {
+        el.innerText = translations[lang][key];
+      }
+    }
+  });
+  localStorage.setItem("lang", lang);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Елементи модальних вікон
+  const errorModal = document.getElementById('neon-error-modal');
+  const errorMessageEl = document.getElementById('neon-error-message');
+  const errorClose = document.querySelector('.neon-modal-close');
+  
+  const successModal = document.getElementById('neon-success-modal');
+  const successMessageEl = document.getElementById('neon-success-message');
+  const successClose = document.querySelector('.success-close');
+  
+  const phoneInput = document.getElementById('phone');
+
+  // Функції показу вікон
+  function showNeonError(message) {
+    if (errorMessageEl && errorModal) {
+      errorMessageEl.innerText = message;
+      errorModal.style.display = 'block';
+    }
+  }
+
+  function showNeonSuccess(message) {
+    if (successMessageEl && successModal) {
+      successMessageEl.innerText = message;
+      successModal.style.display = 'block';
+      setTimeout(() => successModal.style.display = 'none', 3500); // Авто-закриття
+    }
+  }
+
+  // Закриття вікон
+  [errorClose, successClose].forEach(btn => {
+    if (btn) btn.addEventListener('click', () => {
+      if (errorModal) errorModal.style.display = 'none';
+      if (successModal) successModal.style.display = 'none';
+    });
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === errorModal) errorModal.style.display = 'none';
+    if (e.target === successModal) successModal.style.display = 'none';
+  });
+
+  // Фільтрація вводу телефону (тільки цифри та перший +)
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/[^\d+]/g, '');
+      // Дозволяємо + тільки на початку
+      if (val.indexOf('+') > 0) {
+        val = val.substring(0, 1) + val.substring(1).replace(/\+/g, '');
+      }
+      e.target.value = val;
+    });
+  }
+
+  // Мовна логіка
+  const langCurrent = document.querySelector(".lang-current");
+  const langItems = document.querySelectorAll(".lang-list li");
+
+  function updateLangUI(langCode) {
+    const activeItem = Array.from(langItems).find(el => el.dataset.lang === langCode);
+    if (activeItem && langCurrent) {
+      langCurrent.innerText = activeItem.innerText;
+    }
+  }
+
+  langItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const selectedLang = item.getAttribute("data-lang");
+      setLanguage(selectedLang);
+      updateLangUI(selectedLang);
+    });
+  });
+
+  const savedLang = localStorage.getItem("lang") || "uk";
+  setLanguage(savedLang);
+  updateLangUI(savedLang);
+
+  // Відправка форми
+  const orderForm = document.getElementById('order-form'); 
+
+  if (orderForm) {
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const currentLang = localStorage.getItem("lang") || "uk";
+      
+      const nameInp = document.getElementById('name');
+      const carInp = document.getElementById('car');
+      const issueInp = document.getElementById('issue');
+
+      // Регулярні вирази
+      const nameRegex = /^[A-ZА-ЯІЇЄ][a-zа-яіїє']+\s[A-ZА-ЯІЇЄ][a-zа-яіїє']+$/;
+      const phoneRegex = /^\+[\d]{10,14}$/;
+
+      // Скидання кольорів рамок
+      [nameInp, phoneInput, carInp, issueInp].forEach(el => el.style.borderColor = "#00f0ff");
+
+      // 1. Валідація імені
+      if (!nameRegex.test(nameInp.value.trim())) {
+        showNeonError(translations[currentLang].error_name);
+        nameInp.style.borderColor = "#ff0055";
+        nameInp.focus();
+        return;
+      }
+
+      // 2. Валідація телефону
+      const cleanPhone = phoneInput.value.trim();
+      if (!phoneRegex.test(cleanPhone)) {
+        showNeonError(translations[currentLang].error_phone);
+        phoneInput.style.borderColor = "#ff0055";
+        phoneInput.focus();
+        return;
+      }
+
+      // 3. Валідація опису
+      if (issueInp.value.trim().length < 5) {
+        showNeonError(translations[currentLang].error_issue);
+        issueInp.style.borderColor = "#ff0055";
+        return;
+      }
+
+      const formData = {
+        name: nameInp.value.trim(),
+        phone: cleanPhone,
+        car: carInp.value,
+        issue: issueInp.value.trim(),
+        date: new Date().toLocaleString(),
+        site_language: currentLang
+      };
+
+      push(ref(db, 'orders/'), formData)
+        .then(() => {
+          showNeonSuccess(translations[currentLang].success);
+          orderForm.reset();
+        })
+        .catch((error) => {
+          showNeonError("Firebase Error: " + error.message);
+        });
+    });
+  }
+});
+
 
 //Слайдер бесконечный
 window.addEventListener('DOMContentLoaded', () => {
@@ -543,15 +749,27 @@ document.addEventListener("DOMContentLoaded", () => {
   updateDropdownText(savedLang); // Оновлюємо вигляд кнопки
 });
 
-// Твоя існуюча функція перекладу (переконайся, що вона виглядає так)
-function setLanguage(lang) {
-  document.querySelectorAll("[data-key]").forEach(el => {
-    const key = el.dataset.key;
-    if (translations[lang] && translations[lang][key]) {
-      // Замінюємо \n на <br> для коректного відображення переносів
-      const formattedText = translations[lang][key].replace(/\n/g, '<br>');
-      el.innerHTML = formattedText;
-    }
-  });
-  localStorage.setItem("lang", lang);
-}
+//....................................................scroll
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector('.neon-form');
+
+  const observerOptions = {
+    root: null, // стежимо відносно вікна браузера
+    threshold: 0.2 // анімація спрацює, коли 20% форми з'явиться на екрані
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Коли форма входить у поле зору
+        form.classList.add('show');
+      } else {
+        // Коли форма виходить з поля зору (зникає)
+        form.classList.remove('show');
+      }
+    });
+  }, observerOptions);
+
+  observer.observe(form);
+});
