@@ -1,3 +1,6 @@
+//DataBase
+
+
 
 //Слайдер бесконечный
 window.addEventListener('DOMContentLoaded', () => {

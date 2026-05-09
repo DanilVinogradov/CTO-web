@@ -11,7 +11,7 @@
       href="./blocks/main.css"
     />
     <script
-    
+      type="module"
       src="./main.js"
       defer
     ></script>
@@ -211,6 +211,40 @@
         </div>
       </section>
 
+      <section class="order-form">
+        <div class="container">
+          <h1 class="infoTitle" data-key="form_title">Запис на сервіс</h1>
+            <form id="order-form" class="neon-form">
+              <div class="input-group">
+                <input type="text" id="name" placeholder="Ім'я та Прізвище" required>
+                <span id="name-error" class="error-msg"></span>
+              </div>
+
+              <input type="tel" id="phone" 
+                placeholder="+380..." 
+                required 
+                oninput="this.value = this.value.replace(/[^\d+]/g, '')">
+
+              <select id="car" required>
+                <option value="" disabled selected>Виберіть марку авто</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                <option value="Audi">Audi</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Opel">Opel</option>
+                <option value="Ford">Ford</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Інша марка">Інша марка...</option>
+              </select>
+
+              <textarea id="issue" placeholder="Що саме турбує в авто?" required minlength="5"></textarea>
+              
+              <button type="submit" class="button">Відправити заявку</button>
+            </form>
+          <div id="form-status" style="color: #00f0ff; margin-top: 10px; text-align: center;"></div>
+        </div>
+      </section>
+
   </main>
 
 
@@ -256,5 +290,29 @@
       </div>
       </div>
     </footer>
+
+    <div id="neon-error-modal" class="neon-modal">
+  <div class="neon-modal-content glass from-top">
+    <span class="neon-modal-close icon icon--close"></span>
+    <div class="neon-modal-icon-wrp">
+        <span class="neon-modal-icon">!</span>
+    </div>
+    <h2 id="neon-error-message" class="neon-modal-text">
+        Введіть Ім'я та Прізвище з великої літери
+    </h2>
+  </div>
+</div>
+
+<div id="neon-success-modal" class="neon-modal success">
+  <div class="neon-modal-content success-glow from-top">
+    <span class="neon-modal-close success-close">&times;</span>
+    <div class="neon-modal-icon-wrp">
+        <span class="neon-modal-icon success-icon">✓</span>
+    </div>
+    <h2 id="neon-success-message" class="neon-modal-text">
+        Заявку успішно надіслано!
+    </h2>
+  </div>
+</div>
 </body>
 </html>

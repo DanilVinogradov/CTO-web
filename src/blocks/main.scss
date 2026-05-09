@@ -178,3 +178,320 @@ canvas {
 }
 
 
+
+//.........................................................
+//Form
+/* Контейнер форми з ефектом скла */
+.neon-form {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Початковий стан форми (невидима) */
+.neon-form {
+  opacity: 0;
+  transform: translateY(50px); /* Зміщення вниз для ефекту випливання */
+  transition: all 0.8s ease-out; /* Плавність анімації */
+  visibility: hidden;
+}
+
+/* Стан, коли форма в полі зору */
+.neon-form.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.neon-form input {
+  padding: 15px 20px; 
+  height: auto;
+  line-height: 1.2; 
+  box-sizing: border-box; 
+}
+
+/* Заголовок форми */
+.infoTitle {
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Стилі для полів вводу */
+.neon-form input, 
+.neon-form textarea {
+  // width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #00f0ff;
+  border-radius: 8px;
+  padding: 15px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(0, 240, 255, 0.2);
+}
+
+/* Ефект при натисканні на поле */
+.neon-form input:focus, 
+.neon-form textarea:focus {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), inset 0 0 10px rgba(0, 240, 255, 0.2);
+  border-color: #fff;
+}
+
+/* Плейсхолдер (текст підказки) */
+.neon-form input::placeholder, 
+.neon-form textarea::placeholder {
+  color: rgba(0, 240, 255, 0.5);
+}
+
+/* Неонова кнопка */
+.neon-form .button {
+  background: transparent;
+  border: 2px solid #00f0ff;
+  color: #00f0ff;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-form .button:hover {
+  background: #00f0ff;
+  color: #000;
+  box-shadow: 0 0 30px #00f0ff, 0 0 60px #00f0ff;
+  transform: translateY(-2px);
+}
+
+/* Стиль для повідомлень про помилки (якщо захочеш додати) */
+.neon-form input:invalid:not(:placeholder-shown) {
+  border-color: #ff0055;
+  box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+}
+
+//error
+/* Стиль для повідомлення про помилку */
+.error-msg {
+  color: #ff0055;
+  font-size: 12px;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  display: block;
+  text-shadow: 0 0 5px rgba(255, 0, 85, 0.5);
+}
+
+/* Стиль для випадаючого списку, щоб він був у неоновому стилі */
+.neon-form select {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #00f0ff;
+  border-radius: 8px;
+  padding: 15px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* Прибираємо стандартну стрілку браузера */
+}
+
+.neon-form select option {
+  background: #111; /* Колір фону списку всередині */
+  color: #fff;
+}
+
+//error table
+
+/* Основний контейнер модального вікна (фон, що розмивається) */
+.neon-modal {
+  display: none; /* Спочатку приховане */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Напівпрозорий фон */
+  backdrop-filter: blur(5px); /* Ефект розмиття */
+}
+
+/* Контент вікна: неоновий неон + Glassmorphism */
+.neon-modal-content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ff0055; /* Рожевий неоновий колір */
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* По центру */
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.3), inset 0 0 10px rgba(255, 0, 85, 0.1);
+  text-align: center;
+}
+
+/* Кнопка закриття (хрестик) */
+.neon-modal-close {
+  color: #ff0055;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  margin-top: -30px;
+  margin-right: -30px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px #ff0055;
+}
+
+.neon-modal-close:hover {
+  color: #fff;
+  text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+}
+
+/* Іконка попередження */
+.neon-modal-icon-wrp {
+    margin-bottom: 20px;
+}
+.neon-modal-icon {
+    font-size: 50px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+}
+
+/* Текст повідомлення */
+.neon-modal-text {
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+/* Анімація появи (зверху вниз) */
+@keyframes fromTop {
+    from { opacity: 0; transform: translate(-50%, -100%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.from-top {
+    animation: fromTop 0.5s ease-out;
+}
+
+
+//Alles gut machen
+
+/* Стилі для успішного вікна */
+.neon-modal.success .neon-modal-content {
+  border-color: #00ff88; /* Зелений неон */
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), inset 0 0 10px rgba(0, 255, 136, 0.1);
+}
+
+.success-icon {
+  color: #fff;
+  text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+}
+
+.success-close {
+  color: #00ff88;
+  text-shadow: 0 0 5px #00ff88;
+}
+
+.success-close:hover {
+  text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+}
+
+
+//admin
+
+.admin-table-container {
+            padding: 20px;
+            overflow-x: auto;
+            background: rgba(0, 0, 0, 0.4);
+            margin: 20px;
+            border: 1px solid #00f0ff;
+            border-radius: 8px;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+        }
+        .admin-table th, .admin-table td {
+            padding: 12px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            text-align: left;
+        }
+        .admin-table th {
+            color: #00f0ff;
+            text-transform: uppercase;
+        }
+        .phone-link { color: #00f0ff; text-decoration: none; border-bottom: 1px dashed; }
+
+        .btn-delete {
+    background: #ff0055;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+.btn-assign {
+    background: #00f0ff;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.btn-delete:hover { background: #cc0044; }
+.btn-assign:hover { background: #00c6d4; }
+
+//window
+.neon-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.neon-input {
+    background: #000;
+    border: 1px solid #00f0ff;
+    color: #00f0ff;
+    padding: 12px;
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.close-modal {
+    color: #ff0055;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
